@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/navigation_weather"
-        android:name="com.example.finalproject.ui.watch.WatchFragment"
+        android:name="com.example.finalproject.ui.weather.WeatherFragment"
         android:label="@string/title_weather"
         tools:layout="@layout/fragment_weather" />
 </navigation>

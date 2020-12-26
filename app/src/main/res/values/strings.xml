@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FinalProject</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_card">Card</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_watch">Watch</string>
     <string name="title_weather">Weather</string>
@@ -9,4 +9,7 @@
     <string name="start">start</string>
     <string name="stop">stop</string>
     <string name="restart">restart</string>
+    <string name="score">Score:</string>
+    <string name="reset">Reset</string>
+    <string name="a">A*</string>
 </resources>

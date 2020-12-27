@@ -18,7 +18,7 @@ class WatchViewModel : ViewModel() {
     }
 
     fun stop(){
-        running=true
+        running=false
     }
 
     fun restart(){

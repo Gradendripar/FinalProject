@@ -40,11 +40,11 @@ class WatchFragment : Fragment() {
             viewModel.start()
         }
 
-        button_start.setOnClickListener {
+        button_stop.setOnClickListener {
             viewModel.stop()
         }
 
-        button_start.setOnClickListener {
+        button_restart.setOnClickListener {
             viewModel.restart()
         }
     }

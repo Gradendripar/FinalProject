@@ -15,6 +15,7 @@ class WatchFragment : Fragment() {
 
     companion object {
         fun newInstance() = WatchFragment()
+        var second=0
     }
 
     private lateinit var viewModel: WatchViewModel
@@ -30,6 +31,7 @@ class WatchFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(WatchViewModel::class.java)
         viewModel.seconds.observe(this, Observer {
+            second=it
             val hours = it / 3600
             val minutes = (it % 3600) / 60
             val secs = it % 60
@@ -47,6 +49,10 @@ class WatchFragment : Fragment() {
         button_restart.setOnClickListener {
             viewModel.restart()
         }
+    }
+    override fun onStop() {
+        super.onStop()
+        viewModel.saveData()
     }
 
 }

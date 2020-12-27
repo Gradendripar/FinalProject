@@ -18,11 +18,11 @@ class MusicViewModel (application: Application): AndroidViewModel(application) {
     private val _musicNameList: MutableLiveData<MutableList<String>> = MutableLiveData()
     var current =-1
         get() = field
-    var isPause=true
+    var isPause=false
         get() = field
 
-    val musicList= mutableListOf<String>()
-    val musicNameList= mutableListOf<String>()
+    var musicList= mutableListOf<String>()
+    var musicNameList= mutableListOf<String>()
     val musicLists: LiveData<MutableList<String>> = _musicList
     val musicNameLists: LiveData<MutableList<String>> = _musicNameList
 

@@ -1,14 +1,29 @@
 package com.example.finalproject.ui.watch
 
+import android.app.Application
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 
-class WatchViewModel : ViewModel() {
+class WatchViewModel (application: Application) : AndroidViewModel(application) {
     private var _seconds: MutableLiveData<Int> = MutableLiveData()
     private var running = false
-    val seconds: LiveData<Int> = _seconds
+    var second=loadData()
+
+    fun get(): LiveData<Int> {
+        if (second != null) {
+            _seconds.postValue(second)
+        }else{
+            _seconds.postValue(0)
+        }
+        return _seconds
+    }
+
+    val seconds: LiveData<Int> = get()
 
     init {
         runTimer()
@@ -37,5 +52,30 @@ class WatchViewModel : ViewModel() {
             }
         }
         handler.post(runnable)
+    }
+
+    fun saveData() {
+        try {
+            val output = getApplication<Application>()?.openFileOutput("WatchFile", AppCompatActivity.MODE_PRIVATE)
+            ObjectOutputStream(output).use {
+                it.writeObject(WatchFragment.second)
+            }
+        }catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+    //加载数据
+    fun loadData(): Int? {
+        try {
+            val input = getApplication<Application>()?.openFileInput("WatchFile")
+            val objectInputStream =  ObjectInputStream(input)
+            val second = objectInputStream.readObject() as Int
+            objectInputStream.close()
+            input?.close()
+            return second
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return null
+        }
     }
 }

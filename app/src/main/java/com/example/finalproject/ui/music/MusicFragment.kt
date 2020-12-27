@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -26,19 +25,16 @@ class MusicFragment : Fragment() {
     val mediaPlayer= MediaPlayer()
     lateinit var musicList:MutableList<String>
     lateinit var musicNameList:MutableList<String>
-
     private lateinit var musicViewModel: MusicViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_music, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
+        super.onViewCreated(view , savedInstanceState)
         musicViewModel = ViewModelProviders.of(this).get(MusicViewModel::class.java)
         musicViewModel.musicLists.observe(viewLifecycleOwner, Observer {
             musicList=it
@@ -51,15 +47,17 @@ class MusicFragment : Fragment() {
         }
         mediaPlayer.setOnCompletionListener {
             musicViewModel.setOnCompletionListener()
-//            play()
+            play()
             musicViewModel.notification()
 
         }
+
         if(context?.let { ContextCompat.checkSelfPermission(it,android.Manifest.permission.READ_EXTERNAL_STORAGE) } != PackageManager.PERMISSION_GRANTED){
             activity?.let { ActivityCompat.requestPermissions(it, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),0) }
         }else{
             musicViewModel.getMusicList()
         }
+
         seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(
                 seekBar: SeekBar,
@@ -79,17 +77,25 @@ class MusicFragment : Fragment() {
             while (true){
                 Thread.sleep(1000)
                 activity?.runOnUiThread {
-                    seekBar.max=mediaPlayer.duration
-                    seekBar.progress=mediaPlayer.currentPosition
+                    seekBar?.max=mediaPlayer.duration
+                    seekBar?.progress=mediaPlayer.currentPosition
                 }
             }
         }
+
         play.setOnClickListener {
-            play()
+            if(musicViewModel.isPause){
+                mediaPlayer.start()
+                musicViewModel.isPause=false
+            }
+            else{
+                play()
+            }
         }
         pause.setOnClickListener {
-            if(!musicViewModel.isPause){
+            if(musicViewModel.isPause){
                 mediaPlayer.start()
+                musicViewModel.isPause=false
             }else{
                 mediaPlayer.pause()
                 musicViewModel.isPause = true
@@ -105,6 +111,7 @@ class MusicFragment : Fragment() {
         }
         prev.setOnClickListener {
             musicViewModel.onPrev()
+            musicViewModel.notification()
             play()
         }
     }
@@ -132,4 +139,11 @@ class MusicFragment : Fragment() {
         musicViewModel.getMusicList()
     }
 
+    override fun onStop() {
+        super.onStop()
+        mediaPlayer.release()
+        musicViewModel.musicList.clear()
+        musicViewModel.musicNameList.clear()
+        musicViewModel.current=-1
+    }
 }

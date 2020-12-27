@@ -12,4 +12,5 @@
     <string name="score">Score:</string>
     <string name="reset">Reset</string>
     <string name="a">A*</string>
+    <string name="position">占位符</string>
 </resources>

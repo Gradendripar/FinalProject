@@ -19,10 +19,10 @@
         tools:layout="@layout/fragment_card" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.finalproject.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_music"
+        android:name="com.example.finalproject.ui.music.MusicFragment"
+        android:label="@string/title_music"
+        tools:layout="@layout/fragment_music" />
 
     <fragment
         android:id="@+id/navigation_watch"

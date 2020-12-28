@@ -8,12 +8,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
+        android:layout_width="130dp"
         android:layout_height="130dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginEnd="44dp"
         app:layout_constraintBottom_toTopOf="@+id/textView_wendu"
-        app:layout_constraintEnd_toStartOf="@+id/textView_city"
+        app:layout_constraintEnd_toStartOf="@+id/textView_province"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,8 +19,19 @@
         android:id="@+id/textView_province"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="61dp"
+        android:text="TextView"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView_city"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="113dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginEnd="61dp"
         android:layout_marginBottom="50dp"
         android:text="TextView"
         android:textSize="30sp"
@@ -31,53 +40,40 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="70dp"
-        android:text="TextView"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_province"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/textView_wendu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="81dp"
         android:text="TextView"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/listView"
         app:layout_constraintEnd_toStartOf="@+id/textView_shidu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_province" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView_shidu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="11dp"
         android:text="TextView"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView_wendu"
-        app:layout_constraintTop_toBottomOf="@+id/textView_province" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_city" />
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="410dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_wendu"
-        app:layout_constraintVertical_bias="0.981" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_wendu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
